@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="fragments/nav :: navigation"></div>
+<div class="container">
+    <h1>Admin Dashboard</h1>
+    <p>Manage users, classes and reports as depicted in the system diagrams.</p>
+
+    <div th:if="${successMessage}" class="alert alert--success" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert alert--error" th:text="${errorMessage}"></div>
+
+    <div class="layout-grid">
+        <div class="card">
+            <h2>Add Teacher</h2>
+            <form th:action="@{/web/admin/teachers}" th:object="${teacherForm}" method="post">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" th:field="*{username}">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" th:field="*{password}">
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" th:field="*{fullName}">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" th:field="*{email}">
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" th:field="*{subject}">
+                </div>
+                <div class="form-group">
+                    <label>Class Assigned</label>
+                    <input type="text" th:field="*{classAssigned}">
+                </div>
+                <button type="submit">Save Teacher</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Add Parent</h2>
+            <form th:action="@{/web/admin/parents}" th:object="${parentForm}" method="post">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" th:field="*{username}">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" th:field="*{password}">
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" th:field="*{fullName}">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" th:field="*{phone}">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" th:field="*{email}">
+                </div>
+                <button type="submit">Save Parent</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Add Class</h2>
+            <form th:action="@{/web/admin/classes}" th:object="${classForm}" method="post">
+                <div class="form-group">
+                    <label>Class Name</label>
+                    <input type="text" th:field="*{className}">
+                </div>
+                <div class="form-group">
+                    <label>Section</label>
+                    <input type="text" th:field="*{section}">
+                </div>
+                <div class="form-group">
+                    <label>Schedule</label>
+                    <input type="text" th:field="*{schedule}">
+                </div>
+                <div class="form-group">
+                    <label>Teacher</label>
+                    <select th:field="*{teacherId}">
+                        <option th:each="teacher : ${teachers}"
+                                th:value="${teacher.teacherId}"
+                                th:text="${teacher.fullName + ' (#' + teacher.teacherId + ')'}">
+                        </option>
+                    </select>
+                </div>
+                <button type="submit">Save Class</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Add Student</h2>
+            <form th:action="@{/web/admin/students}" th:object="${studentForm}" method="post">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" th:field="*{username}">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" th:field="*{password}">
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" th:field="*{fullName}">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" th:field="*{email}">
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <input type="text" th:field="*{gender}">
+                </div>
+                <div class="form-group">
+                    <label>Parent Contact</label>
+                    <input type="text" th:field="*{parentContact}">
+                </div>
+                <div class="form-group">
+                    <label>Class</label>
+                    <select th:field="*{classId}">
+                        <option th:each="cls : ${classes}"
+                                th:value="${cls.classId}"
+                                th:text="${cls.className + ' (#' + cls.classId + ')'}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Parent (optional)</label>
+                    <select th:field="*{parentId}">
+                        <option value="">-- select --</option>
+                        <option th:each="parent : ${parents}"
+                                th:value="${parent.parentId}"
+                                th:text="${parent.name + ' (#' + parent.parentId + ')'}"></option>
+                    </select>
+                </div>
+                <button type="submit">Save Student</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="layout-grid" style="margin-top:2rem;">
+        <div class="card">
+            <h2>Teachers</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Class Assigned</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="teacher : ${teachers}">
+                    <td th:text="${teacher.fullName}"></td>
+                    <td th:text="${teacher.email}"></td>
+                    <td th:text="${teacher.classAssigned}">-</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Classes</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Section</th>
+                    <th>Teacher</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cls : ${classes}">
+                    <td th:text="${cls.className}"></td>
+                    <td th:text="${cls.section}"></td>
+                    <td th:text="${cls.teacher != null ? cls.teacher.fullName : 'Unassigned'}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Students</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Parent</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="student : ${students}">
+                    <td th:text="${student.fullName}"></td>
+                    <td th:text="${student.classRoom != null ? student.classRoom.className : '-'}"></td>
+                    <td th:text="${student.parent != null ? student.parent.name : '-'}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

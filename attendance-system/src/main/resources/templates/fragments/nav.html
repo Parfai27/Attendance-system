@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav class="navbar" th:fragment="navigation">
+    <div class="navbar__brand">
+        <a th:href="@{/}">Attendance Suite</a>
+    </div>
+    <div class="navbar__links">
+        <a th:href="@{/dashboard/admin}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Dashboard</a>
+        <a th:href="@{/web/admin}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Admin</a>
+        <a th:href="@{'/dashboard/teacher'}" th:if="${#authorization.expression('hasRole(''TEACHER'')')}">Teacher</a>
+        <a th:href="@{'/dashboard/student'}" th:if="${#authorization.expression('hasRole(''STUDENT'')')}">Student</a>
+        <a th:href="@{'/dashboard/parent'}" th:if="${#authorization.expression('hasRole(''PARENT'')')}">Parent</a>
+    </div>
+    <div class="navbar__user" th:if="${#authorization.expression('isAuthenticated()')}">
+        <span th:text="${#authentication.name}"></span>
+        <form th:action="@{/logout}" method="post">
+            <button class="btn-secondary" type="submit">Logout</button>
+        </form>
+    </div>
+    <div class="navbar__user" th:if="${!#authorization.expression('isAuthenticated()')}">
+        <a class="btn-primary" th:href="@{/login}">Sign in</a>
+    </div>
+</nav>
+</body>
+</html>
+

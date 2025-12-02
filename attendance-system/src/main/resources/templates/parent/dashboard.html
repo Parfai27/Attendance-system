@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Parent Console</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="fragments/nav :: navigation"></div>
+<div class="container">
+    <h1 th:text="'Hello, ' + ${parent.name}"></h1>
+    <p>Monitor your children's attendance and notifications.</p>
+
+    <div class="layout-grid">
+        <div class="card">
+            <h2>Your Children</h2>
+            <ul>
+                <li th:each="child : ${children}">
+                    <a th:href="@{'/web/parents/' + ${parent.parentId} + '?studentId=' + ${child.studentId}}"
+                       th:text="${child.fullName}"
+                       th:classappend="${child.studentId} == ${activeStudentId} ? 'active' : ''"></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card" th:if="${attendanceRecords != null}">
+            <h2>Attendance</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="record : ${attendanceRecords}">
+                    <td th:text="${record.date}"></td>
+                    <td th:text="${record.status}"></td>
+                    <td th:text="${record.remarks}">-</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top:2rem;">
+        <h2>Notifications</h2>
+        <ul>
+            <li th:each="notification : ${notifications}">
+                <strong th:text="${notification.createdAt}"></strong>:
+                <span th:text="${notification.message}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+
+
+

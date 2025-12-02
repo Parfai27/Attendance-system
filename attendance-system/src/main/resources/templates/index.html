@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Attendance Management</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="fragments/nav :: navigation"></div>
+<div class="container">
+    <h1>Student Attendance Management System</h1>
+    <p>This lightweight UI mirrors the use-case diagrams and lets each role quickly
+        interact with the core workflows (mark attendance, review logs, receive notifications).</p>
+    <div class="layout-grid">
+        <div class="card">
+            <h2>Admin Portal</h2>
+            <p>Manage teachers, students, classes and generate reports.</p>
+            <a th:href="@{/web/admin}">
+                <button>Open Admin Dashboard</button>
+            </a>
+        </div>
+        <div class="card">
+            <h2>Teacher Portal</h2>
+            <p>View assigned classes and mark attendance by date.</p>
+            <form th:action="@{'/web/teachers/' + 1}" method="get">
+                <label>Teacher ID</label>
+                <input type="number" name="teacherId" placeholder="Enter teacher id" value="1"
+                       oninput="this.form.action='/web/teachers/'+this.value">
+                <button type="submit">Go to Teacher View</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>Student Portal</h2>
+            <p>Track personal attendance and remarks.</p>
+            <form th:action="@{'/web/students/' + 1}" method="get">
+                <label>Student ID</label>
+                <input type="number" name="studentId" placeholder="Enter student id" value="1"
+                       oninput="this.form.action='/web/students/'+this.value">
+                <button type="submit">View Attendance</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>Parent Portal</h2>
+            <p>Check child attendance and notifications.</p>
+            <form th:action="@{'/web/parents/' + 1}" method="get">
+                <label>Parent ID</label>
+                <input type="number" name="parentId" placeholder="Enter parent id" value="1"
+                       oninput="this.form.action='/web/parents/'+this.value">
+                <button type="submit">Open Parent View</button>
+            </form>
+        </div>
+    </div>
+    <p style="margin-top:2rem;color:#4c566a;">© <span th:text="${currentYear}"></span> Attendance Platform.</p>
+</div>
+</body>
+</html>
+

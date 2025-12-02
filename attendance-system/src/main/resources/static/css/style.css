@@ -1,0 +1,257 @@
+body {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    margin: 0;
+    background-color: #f5f7fb;
+    color: #111827;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+}
+
+nav.navbar {
+    background: #0b1221;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2.5rem;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.navbar__brand a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.navbar__links a {
+    color: #dbeafe;
+    text-decoration: none;
+    margin-left: 1.25rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.navbar__links a:hover {
+    opacity: 0.75;
+}
+
+.navbar__user {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #dbeafe;
+}
+
+.layout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #0b1221;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+}
+
+table thead {
+    background: #0b1221;
+    color: #fff;
+}
+
+table th, table td {
+    padding: 0.65rem;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+form .form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.65rem;
+    border-radius: 10px;
+    border: 1px solid #c7d2fe;
+    background: #f9fafb;
+}
+
+button, .btn-primary, .btn-secondary {
+    border: none;
+    padding: 0.65rem 1.2rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+button, .btn-primary {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+.alert {
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.alert--success {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.alert--error {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.hero {
+    background: linear-gradient(120deg, #0f172a, #1d4ed8);
+    color: #fff;
+    padding: 3rem 2rem;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.hero__content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero__actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: -3rem;
+}
+
+.metric-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 1.25rem;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.15);
+    text-align: center;
+}
+
+.metric-card span {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.metric-card strong {
+    display: block;
+    font-size: 2rem;
+    margin-top: 0.35rem;
+}
+
+.metric-card--accent {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    color: #fff;
+}
+
+.timeline {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline li {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.status-pill {
+    padding: 0.2rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-pill--present {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.status-pill--absent {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.status-pill--late {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.auth-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+}
+
+.auth-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 2rem;
+    width: 380px;
+    box-shadow: 0 40px 80px rgba(15, 23, 42, 0.35);
+}
+
+.auth-card__brand h1 {
+    margin: 0;
+}
+
+.link-back {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+

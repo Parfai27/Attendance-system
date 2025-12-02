@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Executive Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="fragments/nav :: navigation"></div>
+<section class="hero">
+    <div class="hero__content">
+        <h1>Student Attendance Intelligence</h1>
+        <p>High-level metrics, pulse checks, and quick actions for administrators.</p>
+        <div class="hero__actions">
+            <a class="btn-primary" th:href="@{/web/admin}">Manage Records</a>
+            <a class="btn-secondary" th:href="@{/api/admin/reports}">Export Reports</a>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <span>Teachers</span>
+            <strong th:text="${snapshot.teacherCount}">0</strong>
+        </div>
+        <div class="metric-card">
+            <span>Students</span>
+            <strong th:text="${snapshot.studentCount}">0</strong>
+        </div>
+        <div class="metric-card">
+            <span>Classes</span>
+            <strong th:text="${snapshot.classCount}">0</strong>
+        </div>
+        <div class="metric-card">
+            <span>Attendance Records</span>
+            <strong th:text="${snapshot.attendanceCount}">0</strong>
+        </div>
+        <div class="metric-card metric-card--accent">
+            <span>Present Rate</span>
+            <strong th:text="${#numbers.formatDecimal(snapshot.presentRate, 1, 2)} + '%'">0%</strong>
+        </div>
+    </div>
+
+    <div class="layout-grid" style="margin-top:2rem;">
+        <div class="card">
+            <h2>Latest Attendance</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Student</th>
+                    <th>Status</th>
+                    <th>Class</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="record : ${snapshot.recentAttendance}">
+                    <td th:text="${record.date}"></td>
+                    <td th:text="${record.student.fullName}"></td>
+                    <td>
+                        <span class="status-pill"
+                              th:text="${record.status}"
+                              th:classappend="' status-pill--' + ${record.status.name().toLowerCase()}"></span>
+                    </td>
+                    <td th:text="${record.classRoom.className}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h2>Recent Notifications</h2>
+            <ul class="timeline">
+                <li th:each="note : ${snapshot.recentNotifications}">
+                    <div>
+                        <strong th:text="${note.createdAt}"></strong>
+                        <p th:text="${note.message}"></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
